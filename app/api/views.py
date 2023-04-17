@@ -7,15 +7,15 @@ from api.serializers import IssueSerializer, ProjectSerializer
 
 class IssueDetailView(APIView):
     def get(self, request, *args, **kwargs):
-        objects = Issue.objects.filter(id=self.kwargs['pk'])
-        serializer = IssueSerializer(objects, many=True)
+        object = Issue.objects.filter(id=self.kwargs['pk']).first()
+        serializer = IssueSerializer(object)
         return Response(serializer.data)
 
 
 class IssueUpdateView(APIView):
     def put(self, request, *args, **kwargs):
-        objects = Issue.objects.filter(id=self.kwargs['pk']).first()
-        serializer = IssueSerializer(objects, data=request.data)
+        object = Issue.objects.filter(id=self.kwargs['pk']).first()
+        serializer = IssueSerializer(object, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -24,22 +24,22 @@ class IssueUpdateView(APIView):
 
 class IssueDeleteView(APIView):
     def delete(self, request, *args, **kwargs):
-        objects = Issue.objects.filter(id=self.kwargs['pk']).first()
-        objects.delete()
+        object = Issue.objects.filter(id=self.kwargs['pk']).first()
+        object.delete()
         return Response(status=204)
 
 
 class ProjectDetailView(APIView):
     def get(self, request, *args, **kwargs):
-        objects = Project.objects.filter(id=self.kwargs['pk']).first()
-        serializer = ProjectSerializer(objects)
+        object = Project.objects.filter(id=self.kwargs['pk']).first()
+        serializer = ProjectSerializer(object)
         return Response(serializer.data)
 
 
 class ProjectUpdateView(APIView):
     def put(self, request, *args, **kwargs):
-        objects = Project.objects.filter(id=self.kwargs['pk']).first()
-        serializer = ProjectSerializer(objects, data=request.data)
+        object = Project.objects.filter(id=self.kwargs['pk']).first()
+        serializer = ProjectSerializer(object, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

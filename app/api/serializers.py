@@ -12,5 +12,5 @@ class IssueSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('name', 'description', 'start_date', 'end_date', 'is_deleted')
+        fields = ('name', 'description', 'start_date', 'end_date', 'is_deleted', 'user')
         read_only_fields = ('id', 'user')
