@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from issue_tracker.models import Issue
+from issue_tracker.models import Issue, Project
 
-from api.serializers import IssueSerializer
+from api.serializers import IssueSerializer, ProjectSerializer
 
 
 class IssueDetailView(APIView):
@@ -27,3 +27,10 @@ class IssueDeleteView(APIView):
         objects = Issue.objects.filter(id=self.kwargs['pk']).first()
         objects.delete()
         return Response(status=204)
+
+
+class ProjectDetailView(APIView):
+    def get(self, request, *args, **kwargs):
+        objects = Project.objects.filter(id=self.kwargs['pk']).first()
+        serializer = ProjectSerializer(objects)
+        return Response(serializer.data)
