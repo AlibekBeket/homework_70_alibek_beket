@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from issue_tracker.models import Issue
+from issue_tracker.models import Issue, Project
 
 
 class IssueSerializer(serializers.ModelSerializer):
@@ -7,3 +7,10 @@ class IssueSerializer(serializers.ModelSerializer):
         model = Issue
         fields = ('summary', 'description', 'status', 'created_at', 'updated_at', 'type', 'project')
         read_only_fields = ('id', 'created_at', 'updated_at')
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ('name', 'description', 'start_date', 'end_date', 'is_deleted')
+        read_only_fields = ('id', 'user')
