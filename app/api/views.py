@@ -25,9 +25,9 @@ class IssueUpdateView(APIView):
 class IssueDeleteView(APIView):
     def delete(self, request, *args, **kwargs):
         object = Issue.objects.filter(id=self.kwargs['pk']).first()
-        object_id = object.id
+        object_id = {'delete issue pk': object.id}
         object.delete()
-        return Response({'delete issue pk': object_id}, status=204)
+        return Response(object_id, status=204)
 
 
 class ProjectDetailView(APIView):
@@ -46,9 +46,10 @@ class ProjectUpdateView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
+
 class ProjectDeleteView(APIView):
     def delete(self, request, *args, **kwargs):
         object = Project.objects.filter(id=self.kwargs['pk']).first()
-        object_id = object.id
+        object_id = {'delete project pk': object.id}
         object.delete()
-        return Response({'delete project pk': object_id}, status=204)
+        return Response(object_id, status=204)

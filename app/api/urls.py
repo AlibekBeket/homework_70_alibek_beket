@@ -1,6 +1,7 @@
 from django.urls import path
 
-from api.views import IssueDetailView, IssueUpdateView, IssueDeleteView, ProjectDetailView, ProjectUpdateView, ProjectDeleteView
+from api.views import IssueDetailView, IssueUpdateView, IssueDeleteView, ProjectDetailView, ProjectUpdateView, \
+    ProjectDeleteView
 
 urlpatterns = [
     path('issue_detail/<int:pk>/', IssueDetailView.as_view(), name='api_issue_detail'),

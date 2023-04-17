@@ -1,9 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.http import urlencode
-from django.views.generic import TemplateView, ListView, UpdateView, DetailView, DeleteView, CreateView
+from django.views.generic import ListView, UpdateView, DetailView, DeleteView, CreateView
 from issue_tracker.models import Issue, Status, Type, Project
 
 from issue_tracker.forms import IssueForm
