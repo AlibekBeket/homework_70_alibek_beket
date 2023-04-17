@@ -1,12 +1,12 @@
-from django.http import JsonResponse
-from django.views import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from issue_tracker.models import Issue
 
 from api.serializers import IssueSerializer
 
 
-class IssueDetailView(View):
+class IssueDetailView(APIView):
     def get(self, request, *args, **kwargs):
         objects = Issue.objects.filter(id=self.kwargs['pk'])
         serializer = IssueSerializer(objects, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
