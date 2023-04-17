@@ -20,3 +20,10 @@ class IssueUpdateView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+
+class IssueDeleteView(APIView):
+    def delete(self, request, *args, **kwargs):
+        objects = Issue.objects.filter(id=self.kwargs['pk']).first()
+        objects.delete()
+        return Response(status=204)
