@@ -44,3 +44,9 @@ class ProjectUpdateView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+class ProjectDeleteView(APIView):
+    def delete(self, request, *args, **kwargs):
+        object = Project.objects.filter(id=self.kwargs['pk']).first()
+        object.delete()
+        return Response(status=204)
