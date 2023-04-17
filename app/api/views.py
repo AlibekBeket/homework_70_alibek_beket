@@ -34,3 +34,13 @@ class ProjectDetailView(APIView):
         objects = Project.objects.filter(id=self.kwargs['pk']).first()
         serializer = ProjectSerializer(objects)
         return Response(serializer.data)
+
+
+class ProjectUpdateView(APIView):
+    def put(self, request, *args, **kwargs):
+        objects = Project.objects.filter(id=self.kwargs['pk']).first()
+        serializer = ProjectSerializer(objects, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
